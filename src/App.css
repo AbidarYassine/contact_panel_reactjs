@@ -1,0 +1,9 @@
+.wrapper {
+  text-align: center;
+}
+
+#viewAll {
+  /* width: 230px;
+  height: 60px; */
+  position: absolute;
+}

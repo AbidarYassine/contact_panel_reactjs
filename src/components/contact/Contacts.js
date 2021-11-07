@@ -15,6 +15,9 @@ function Contacts() {
                     })) : null
                 }
             </div>
+            <div className="wrapper d-md-block mt-4">
+                <button id="viewAll" className="btn btn-block btn-dark">View All</button>
+            </div>
         </div>
     )
 

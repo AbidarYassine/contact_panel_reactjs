@@ -1,23 +1,25 @@
 import React from 'react';
 import {Context} from "../context";
 import {useContext, useState} from 'react';
+import axios from 'axios';
 
 
 function AddContact() {
     const {contacts, setContacts} = useContext(Context);
     const [contact, setContact] = useState({
-        nom: "",
-        prenom: "",
+        name: "",
+        username: "",
         email: "",
-        ville: "",
-        phone: "",
     });
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(true);
 
     const submitForm = (e) => {
         e.preventDefault();
-        const newContacts = contacts.push(contact)
-        // setContacts(newContacts);
+        // const newContact = {...contact, id: Math.random() * 100};
+        axios.post("https://jsonplaceholder.typicode.com/users", contact).then((res) => {
+            // console.log(res.data);
+            contacts.push(res.data);
+        })
     }
     const onChangeInput = (e) => {
         setContact({
@@ -35,21 +37,23 @@ function AddContact() {
         // </Context.Consumer>
         <div className="container-fluid row ">
             <div className="col-md-6 offset-3">
-                <button onClick={() => setShow(!show)} className="btn btn-primary float-end mb-2">Show / Hide</button>
+                <button style={{display: "none"}} onClick={() => setShow(!show)}
+                        className="btn btn-primary float-end mb-2">Show / Hide
+                </button>
             </div>
             {
                 show ? (<form onSubmit={submitForm} className="col-md-6 offset-3">
                     <div className="form-group">
-                        <label htmlFor="nom">Nom</label>
-                        <input onChange={onChangeInput} defaultValue={contact.nom} id="nom"
-                               placeholder="Nom"
-                               className="form-control" name="nom" type="text"/>
+                        <label htmlFor="nom">Name</label>
+                        <input onChange={onChangeInput} defaultValue={contact.name} id="name"
+                               placeholder="Name"
+                               className="form-control" name="name" type="text"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="prenom">Prenom</label>
-                        <input onChange={onChangeInput} id="prenom" defaultValue={contact.prenom}
-                               placeholder="Prenom"
-                               name="prenom"
+                        <input onChange={onChangeInput} id="username" defaultValue={contact.username}
+                               placeholder="User name"
+                               name="username"
                                className="form-control"
                                type="text"/>
                     </div>
@@ -58,22 +62,6 @@ function AddContact() {
                         <input onChange={onChangeInput} id="email" name="email"
                                defaultValue={contact.email}
                                placeholder="Email"
-                               className="form-control"
-                               type="text"/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="ville">Ville</label>
-                        <input onChange={onChangeInput} id="ville" name="ville"
-                               defaultValue={contact.ville}
-                               placeholder="Ville"
-                               className="form-control"
-                               type="text"/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="phone">Phone</label>
-                        <input onChange={onChangeInput} id="phone" name="phone"
-                               defaultValue={contact.phone}
-                               placeholder="Phone"
                                className="form-control"
                                type="text"/>
                     </div>

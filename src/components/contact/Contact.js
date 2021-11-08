@@ -1,14 +1,14 @@
-import React, {useContext, useState} from 'react'
+import React, {useState} from 'react'
 import './contact.css'
-import {Context} from "../context";
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
+import {connect} from "react-redux";
+import {deleteContact} from "../../actions/actions";
 
 function Contact(props) {
 
     const [showContactToggle, setShowContactToggle] = useState(false);
     const contact = props.data;
-    const {contacts, setContacts} = useContext(Context);
     let navigate = useNavigate();
 
     const show = () => {
@@ -16,14 +16,14 @@ function Contact(props) {
         setShowContactToggle(!showContactToggle);
     }
     const deleteContactEvent = (id) => {
-        axios.delete("https://jsonplaceholder.typicode.com/users/" + id).then((res) => {
-            console.log(id);
-            const newContacts = contacts.filter(el => el.id !== id);
-            setContacts(newContacts);
-
-        }).catch((err) => {
-            console.log(err);
-        })
+        // axios.delete("https://jsonplaceholder.typicode.com/users/" + id).then((res) => {
+        //     console.log(id);
+        //     // const newContacts = contacts.filter(el => el.id !== id);
+        //     // setContacts(newContacts);
+        // }).catch((err) => {
+        //     console.log(err);
+        // })
+        props.deleteContact(id);
     }
 
     return (
@@ -113,10 +113,11 @@ function Contact(props) {
 
 }
 
+
 Contact.defaultProps = {
     nom: "no title",
     prenom: "prenom",
     email: "no@no.com",
     tel: "no tel"
 }
-export default Contact;
+export default connect(null, {deleteContact})(Contact);

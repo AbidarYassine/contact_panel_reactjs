@@ -1,11 +1,11 @@
 import React from 'react';
-import {Context} from "../context";
-import {useContext, useState} from 'react';
+import {useState} from 'react';
 import axios from 'axios';
+import {connect} from "react-redux";
+import {addContact} from "../../actions/actions";
 
 
-function AddContact() {
-    const {contacts, setContacts} = useContext(Context);
+function AddContact(props) {
     const [contact, setContact] = useState({
         name: "",
         username: "",
@@ -13,13 +13,11 @@ function AddContact() {
     });
     const [show, setShow] = useState(true);
 
-    const submitForm = (e) => {
+    const submitForm = async (e) => {
         e.preventDefault();
-        // const newContact = {...contact, id: Math.random() * 100};
-        axios.post("https://jsonplaceholder.typicode.com/users", contact).then((res) => {
-            // console.log(res.data);
-            contacts.push(res.data);
-        })
+        const res = await axios.post("https://jsonplaceholder.typicode.com/users", contact)
+        const newContact = {...contact, id: Math.random() * 100};
+        props.addContact(newContact);
         // history.push("/");
     }
     const onChangeInput = (e) => {
@@ -79,7 +77,7 @@ function AddContact() {
 
 }
 
-export default AddContact;
+export default connect(null, {addContact})(AddContact);
 
 
 

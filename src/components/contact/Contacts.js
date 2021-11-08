@@ -20,7 +20,6 @@ function Contacts() {
             </div>
         </div>
     )
-
 }
 
 

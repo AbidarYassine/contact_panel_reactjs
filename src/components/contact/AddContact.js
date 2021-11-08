@@ -20,6 +20,7 @@ function AddContact() {
             // console.log(res.data);
             contacts.push(res.data);
         })
+        // history.push("/");
     }
     const onChangeInput = (e) => {
         setContact({

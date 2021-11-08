@@ -24,7 +24,6 @@ function Contact(props) {
         }).catch((err) => {
             console.log(err);
         })
-        props.history.push("/");
     }
 
     return (

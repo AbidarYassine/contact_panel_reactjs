@@ -1,11 +1,12 @@
 import Contact from "./Contact";
 import {connect} from "react-redux";
-import {getContacts} from "../../actions/actions";
+import {getContacts} from "../../redux/actions/actions";
+import {useEffect} from 'react'
 
 function Contacts(props) {
-    // useEffect(() => {
-    //     props.getContacts();
-    // }, [])
+    useEffect(() => {
+        props.getContacts();
+    }, [])
 
     return (
         <div className="container">
@@ -31,5 +32,4 @@ const mapStateToProps = (state) => {
         contacts: state.contact.contacts
     }
 }
-
 export default connect(mapStateToProps, {getContacts})(Contacts);

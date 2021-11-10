@@ -1,30 +1,12 @@
 const initialState = {
-    contacts: [
-        {
-            id: 1,
-            name: "ahmed abidar",
-            username: "abidar",
-            email: "ahmed@gmail.com"
-        },
-        {
-            id: 2,
-            name: "yassine abidar",
-            username: "abidar",
-            email: "abidar@gmail.com"
-        },
-        {
-            id: 3,
-            name: "issam abidar",
-            username: "abidar",
-            email: "issam@gmail.com"
-        }
-    ]
+    contacts: []
 }
 export default function (state = initialState, action) {
     switch (action.type) {
         case 'GET_CONTACTS':
             return {
-                ...state
+                ...state,
+                contacts: action.payload
             }
         case 'DELETE_CONTACT':
             return {

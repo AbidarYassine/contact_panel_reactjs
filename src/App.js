@@ -1,4 +1,3 @@
-import {useState, useEffect} from 'react'
 import Contacts from './components/contact/Contacts';
 import {Provider} from "react-redux";
 import NavBar from './components/header/NavBar';
@@ -9,18 +8,9 @@ import {Route, Routes} from "react-router-dom";
 import AddContact from "./components/contact/AddContact";
 import About from "./components/about/About";
 import NotFound from "./components/NotFound";
-import axios from 'axios';
-import store from "./store";
+import store from "./redux/store";
 
 function App() {
-
-    const [contacts, setContacts] = useState([]);
-    useEffect(() => {
-        axios.get("https://jsonplaceholder.typicode.com/users").then((res) => {
-            setContacts(res.data);
-        })
-    }, []);
-
     return (
         <div className="App">
             <NavBar title="This is Nav Bar Dynamique"/>

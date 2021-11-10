@@ -2,7 +2,7 @@ import React from 'react';
 import {useState} from 'react';
 import axios from 'axios';
 import {connect} from "react-redux";
-import {addContact} from "../../actions/actions";
+import {addContact} from "../../redux/actions/actions";
 
 
 function AddContact(props) {
